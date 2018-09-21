@@ -1,0 +1,22 @@
+2.1
+    方法内的私有变量即局部变量天生线程安全，不存在同步问题。
+    实例变量存在线程安全问题，多个线程操作实力变量，会造成数据不同步。
+    synchronized得到的锁都是对象锁
+    一个进程获取到synchronized方法是，其他synchronized方法搜要等待释放锁才可以运行，非synchronized方法可以异步调用，无需等待锁的释放。
+    synchronized锁重入（自己可以获取自己的内部锁）
+    一个线程在获取到对象锁之后，可以再次获取此对象锁，即可以在同步方法或同步代码块内访问本类的其他同步方法或同步代码块，仍然可以取到该对象锁。
+    当存在父子类继承关系时，子类可以通过可重入锁调用父类的同步方法。
+    程序抛出异常时，锁自动释放
+    子类方法不能继承父类的同步属性
+2.2
+    synchronized同步方法中如果存在可以异步调用的代码块时，对整个方法进行synchronized加锁会降低代码执行效率。
+    synchronized（this）在需要进行同步的代码加上synchronized 可以在不破坏方法逻辑的基础上提高效率，同时保证数据同步。
+    synchronized（this）块中的代码会同步执行，不在块中的代码异步执行。
+    synchronized（this）获取的对象锁跟 synchronized方法的对象锁时一致的。
+    synchronized（非this对象）
+        多个synchronized（非this对象）之间同步，非this对象的synchronized方法和synchronized代码块之间同步。
+    synchronized静态方法和synchronized（class）代码块
+        对所有类的实例都起作用
+    String常量池，JVM中String具有常量池缓冲的特性，不要使用synchronized（String），作为锁对象，比如使用new Object代替。
+    死锁 设计问题，循环等待锁的释放，注意。
+        可使用jps命令查看运行的线程ID 在使用jstack命令查看结果。
