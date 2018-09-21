@@ -1,0 +1,41 @@
+1.1 线程与进程
+    一个进程中可能有多个线程组成
+1.2 多线程的实现
+    1.继承Thread类
+    2.实现Runnable接口
+    多线程中数据共享造成的线程同步问题
+1.3 currentThread
+    当前正在执行的线程信息
+1.4 isAlive
+    判断线程是否处于活动状态（已经启动且未停止）
+1.5 sleep
+    static方法，暂停当前正在执行的线程Thread.sleep() === Thread.currentThread().sleep();
+1.6 getId getName
+    实例方法，每个Thread对象对应一个Id Name
+1.7 停止线程
+    1.run方法方法完成，正常退出。
+    2.stop方法，直接终止当前正在运行的线程，方法中执行过的代码已经生效
+    3.使用interrupt方法中断线程
+       interrupt 给当前正在执行的线程一个中断标记
+       interrupted 获取当前正在执行的线程是否有中断标记，并清除
+       isInterrupted 实例方法，Thread对象是否有中断标记
+       执行interrupt()方法的线程若不再活动状态，则没有影响
+       interrupted()==Thread.currentThread()=Thread.currentThread().isInterrupted(true)
+       this.interrupted(）测试当前线程是否已中断，当前线程为Thread.currentThread() 并清除终端标记
+       this.isInterrupted() 测试线程是否已中断
+    停止线程，检测到中断标记，往上抛中断异常
+    stop 暴力停止，直接中止并解锁
+    interrupted + return 停止线程 ，推荐使用抛异常方式，使线程停止的时间可以传播
+1.8 暂停线程
+    suspend和resume
+    暂停线程和恢复线程，暂停线程时对锁的占用并没有得到释放
+    注意System.out.println()方法是个同步方法
+    访问非同步方法时suspend造成的数据不同步
+1.9 yield
+    放弃当前CPU资源，放弃时间不定
+1.10 线程优先级
+    线程优先级越高，得到执行的纪律就越大最高为10，最低为1，默认为5
+    由线程a启动的线程b会继承线程a的优先级
+1.11  守护线程
+    进程中不存在非守护线程时，守护线程自动销毁。典型如垃圾回收线程。
+    通过Thread.setDaemon(true/false)设置，
