@@ -1,4 +1,4 @@
 package com.vic.multi;
 
-public class Main {
+    public class Main {
 }
